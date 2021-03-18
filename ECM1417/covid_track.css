@@ -1,0 +1,46 @@
+body {
+    background-image: url("watermark.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: 500px 400px;
+}
+
+.column_33 {
+    float: left;
+    width: 33%;
+    text-align: center;
+
+}
+
+.column_34 {
+    float: left;
+    width: 34%;
+    text-align: center;
+
+}
+
+.column_50 {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.row:after {
+    content: "";
+    line-height: 20%;
+    text-align: center;
+
+}
+
+
+.button_50 {
+    width: 50%;
+    text-align: center;
+}
+
+.button_100 {
+    width: 100%;
+    text-align: center;
+
+}
