@@ -36,7 +36,9 @@
             </div>
 
             <div class="row">
-                <button class="button_100" type="button"  class="cancelbtn">Register</button>
+                <a href="register_page.php" target="_self">
+                    <button class="button_100" type="button"  class="cancelbtn">Register</button>
+                </a>   
             </div>
            A
         </div>
