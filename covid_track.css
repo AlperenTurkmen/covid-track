@@ -1,12 +1,60 @@
 body {
-    background-image: url("watermark.png");
+    /*background-image: url("watermark.png");*/
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center; 
     background-size: 500px 400px;
 }
 
+.covid19_title {
+    border:2px dashed red;
+    width: 100%;
+    float: left;
+    text-align: center;
+    background-color: rgb(173, 185, 202);
+    font: bolder;
+}
+
+.menu {
+    border:1px solid green;
+    width: 20%;
+    float: left;
+    text-align: center;
+    background-color: rgb(173, 185, 202);
+    
+}
+
+.column_100 {
+    border:2px dotted brown;
+    width: 100%;
+    float: left;
+    text-align: center;
+
+}
+.content_main {
+    border:1px solid blue;
+    width: 60%;
+    float: left;
+    text-align: center;
+    padding:2%;
+}
+.column_100 {
+    border:2px dotted brown;
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
+.column_50 {
+    border:2px dotted brown;
+    float: left;
+    width: 45%;
+    text-align: center;
+}
+
 .column_33 {
+    border:2px dotted brown;
+    border:1px solid black;
     float: left;
     width: 33%;
     text-align: center;
@@ -14,25 +62,18 @@ body {
 }
 
 .column_34 {
+    border:1px solid yellow;
     float: left;
     width: 34%;
     text-align: center;
 
 }
 
-.column_50 {
-    float: left;
-    width: 50%;
-    text-align: center;
-}
-
 .row:after {
     content: "";
     line-height: 20%;
     text-align: center;
-
 }
-
 
 .button_50 {
     width: 50%;
@@ -43,4 +84,11 @@ body {
     width: 100%;
     text-align: center;
 
+}
+.menu_name {
+    border:2px dashed rgb(161, 82, 207);  
+    font-size: 20;
+    font-family: Arial;
+    font-weight: bold;
+    color: cornflowerblue;
 }

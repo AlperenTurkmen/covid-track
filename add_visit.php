@@ -5,15 +5,15 @@
     </head>
     <body>
     <?php   
-     $username=$_POST['username'];
-     $password=$_POST['password'];
-     $name=$_POST['name'];
-     $surname=$_POST['surname'];
+     $time=$_POST['time'];
+     $date=$_POST['date'];
+     $duration=$_POST['duration'];
      /*echo $username,' <br>';
      echo $password,' <br>';
      echo $name,' <br>';
      echo $surname,' <br>';
     */
+    echo $date;
     $db_servername = "127.0.0.1";
     $dbuser = "root";
     $dbpassword = "At121212!.";
@@ -25,41 +25,15 @@
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
     }
-
-    if(is_null($name)){ //Checks if it's login or register
-        //echo 'LOGGED IN<br>';
-        $sql="SELECT password FROM users WHERE username='$username'";
-        //echo 'SQL', $sql , "<br>";
-        $result = $conn->query($sql);
-        //echo 'result=' , $result->num_rows ,  "<br>";
-    
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) { 
-              echo "Username: " . $row["userame"]. "<br>";
-            }
-          } else {
-              
-            echo "Password Error or User Not found";
-          }
-    }   else {
-        # code to register
-        #TODO Check if username is already in use.
-        $sql="INSERT INTO users (name,surname,username,password) values ('$name','$surname','$username','$password')";
-        //echo 'SQL ', $sql, "<br>";
-        $result = $conn->query($sql);
-        //echo 'result=' , $result->num_rows;
-
-        //echo 'REGISTERED SUCCESSFULLY!';
-    }
+    $sql="INSERT INTO visits (visit_date_time, visit_location_x, visit_location_y, duration) values ('$time','1','1','$duration')";
     $conn->close();
     ?>
 
     <div class="column_100">
-        <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
+        <div class="covid19_title"><b><h1>COVID - 19 Contact Tracing</h1></b></div>
         <div class="column_100">
             <div class="menu" >
-                <h2 style=background-color: rgb(100, 185, 202);> <a href="main.php"> Home </a></h2>
+                <h2><a href="main.php"> Home </a></h2>
                 <h2><a href="overview.php"> Overview<h2>
                 <h2><a href="add_visit.php"> Add Visit</a></h2>
                 <h2><a href="report.php"> Report</a></h2>
@@ -69,17 +43,33 @@
             </div>
             <div class="content_main"> 
                 <div class="column_100"  >
-                    <h2> Status</h2> 
+                    <h2> Add visit</h2> 
                 </div>
                 <div >
                     <div style="width: 200px; float:left; height:250px;; margin:5px">
                         <p align="justify">
-                            Hi <?php echo $_POST["name"] ?>
-                            you might have had a connection to an infected person at the location shown in red.'
+                        <form action='' method='post'> 
+                        <div class="row" >
+                            <input type="date" placeholder="Date" name="date" required>
+                        </div>
+                        <div class="row" >
+                        <input type="time" placeholder="Time" name="time" required>
+                        </div>
+                        <div class="row" >
+                        <input type="time" placeholder="Duration" name="duration" required>
+                        </div>
+                        <div class="row">
+                            <button class="button_100" type="submit"  class="cancelbtn">Add</button>
+                        </div>
+                        <div class="row">
+                            <button class="button_100" type="submit"  class="cancelbtn">Cancel</button>
+                        </div>
+
                             <br><br><br><br><br><br>
-                            Click on the marker to see details about the infection.</h2> 
+                        </h2> 
                         </p>
                     </div>
+                    </form>
                     <div id="map" style=" border-style: dashed; width: 400px; float:right; height:400px; background:gray; margin:0px ">
                         <img style="max-width:100%;max-height:100%; float:right;" src='exeter.jpg'>
                         <map 

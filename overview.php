@@ -79,11 +79,7 @@
                             <br><br><br><br><br><br>
                             Click on the marker to see details about the infection.</h2> 
                         </p>
-                    </div>
-                    <div id="map" style=" border-style: dashed; width: 400px; float:right; height:400px; background:gray; margin:0px ">
-                        <img style="max-width:100%;max-height:100%; float:right;" src='exeter.jpg'>
-                        <map 
-                    </div>        
+                    </div>      
                 </div>
                 
             </div>
