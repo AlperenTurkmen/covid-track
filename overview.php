@@ -45,7 +45,7 @@
     }   else {
         # code to register
         #TODO Check if username is already in use.
-        $sql="INSERT INTO users (name,surname,username,password) values ('$name','$surname','$username','$password')";
+        $sql="SELECT FROM visits (name,surname,username,password) values ('$name','$surname','$username','$password')";
         //echo 'SQL ', $sql, "<br>";
         $result = $conn->query($sql);
         //echo 'result=' , $result->num_rows;
