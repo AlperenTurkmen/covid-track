@@ -59,8 +59,8 @@
         <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
         <div class="column_100">
             <div class="menu" >
-                <h2 style=background-color: rgb(100, 185, 202);> <a href="main.php"> Home </a></h2>
-                <h2><a href="overview.php"> Overview<h2>
+                <h2 style=background-color: rgb(100, 285, 202);> <a href="main.php"> Home </a></h2>
+                <h2><a href="overview.php"> Overview</a><h2>
                 <h2><a href="add_visit.php"> Add Visit</a></h2>
                 <h2><a href="report.php"> Report</a></h2>
                 <h2><a href="settings.php"> Settings</a></h2>

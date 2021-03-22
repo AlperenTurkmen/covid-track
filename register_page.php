@@ -19,7 +19,11 @@
                     <input type="text" placeholder="Username" name="username" required>
                 
                 <div class="row">
-                    <input type="text" placeholder="Password" name="password" required>
+                    <div class="row">
+                 <input placeholder="Password"  type="password" id="password" name="password" pattern=(?!.*[^a-zA-Z0-9]).{7,}
+                title="May contain  number or letter and at least 8 " required>
+
+            </div>
                 </div>
 
                 <div class="row">
