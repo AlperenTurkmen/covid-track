@@ -1,4 +1,18 @@
+<?php
+    session_start();
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: login.php");
+        exit;
+    } 
+    require_once "config.php";
+?>
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href='covid_track.css'>
+</head>
+<body>
 
 <html>
     <head>
@@ -12,24 +26,15 @@
      $date=$_POST['date'];
      $x=$_POST['x'];
      $y=$_POST['y'];
-     echo 'x,y',$x, ',' ,$y ,'.', '<br>';
+     //echo 'x,y',$x, ',' ,$y ,'.', '<br>';
      $date_time=$date . $time;
      $duration=$_POST['duration'];
-     echo 'date_time:', $date_time,' <br>';
-     echo 'date:', $date,'-',$time,' <br>';
-     
-    $db_servername = "127.0.0.1";
-    $dbuser = "root";
-    $dbpassword = "At121212!.";
-    $dbname = "users";
+     //echo 'date_time:', $date_time,' <br>';
+     //echo 'date:', $date,'-',$time,' <br>';
+     $username=$_SESSION["username"] ;
     
-    // Create connection
-    $conn = new mysqli($db_servername, $dbuser, $dbpassword, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-    $sql="INSERT INTO visits (visit_date_time, visit_location_x, visit_location_y, duration) values (str_to_date('$date_time','%Y-%m-%d%H:%i'),'$x','$y','$duration')";
+    $sql="INSERT INTO visits (username, visit_date_time, visit_location_x, visit_location_y, duration) 
+    values ('$username', str_to_date('$date_time','%Y-%m-%d%H:%i'),'$x','$y','$duration')";
     echo 'SQL:', $sql;
     $result = $conn->query($sql);
     $conn->close();
@@ -39,13 +44,13 @@
         <div class="covid19_title"><b><h1>COVID - 19 Contact Tracing</h1></b></div>
         <div class="column_100">
             <div class="menu" >
-                <h2><a href="main.php"> Home </a></h2>
+                <h2 style=background-color: rgb(100, 285, 202);> <a href="main.php"> Home </a></h2>
                 <h2><a href="overview.php"> Overview</a><h2>
                 <h2><a href="add_visit.php"> Add Visit</a></h2>
                 <h2><a href="report.php"> Report</a></h2>
                 <h2><a href="settings.php"> Settings</a></h2>
                 <h2> &nbsp;</h2>
-                <h2> Logout</h2>
+                <h2><a href="logout.php"> Logout</a></h2>
             </div>
             <div class="content_main"> 
                 <div class="column_100"  >

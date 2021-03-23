@@ -28,37 +28,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
     if (empty($err)) {
-       
-            // Prepare a select statement
             $param_username = $username;
             $sql = "SELECT  name, password FROM users WHERE username = '$param_username'";
             //echo $sql;
             $result = $conn->query($sql);
-
             if($result->num_rows == 1) {
                 $row = $result->fetch_assoc();
                 $name =$row["name"];
                 $hashed_password=$row["password"];
                 //echo '<br> hashed_password',$hashed_password;
-
                 //echo "<br> Name: ". $row["username"]. " " . $row["surname"] . "<br>";
                 if(password_verify ($password, $hashed_password) ){
-                    // echo 'OK';
                                 session_start();
                                 $_SESSION["loggedin"] = true;
                                 $_SESSION["name"] = $name;
                                 $_SESSION["username"] = $username;  
                                 header("Location: main.php");
-   
                 } else {
                         // Username doesn't exist, display a generic error message
-                        $err = "NOT OK Invalid username or password.";
+                        $err = "Invalid username or password.";
                 } 
             } else {
                 // Username doesn't exist, display a generic error message
                 $err = "Invalid username or password.";     
-            }    
-        
+            }            
     }
 }
 
@@ -69,53 +62,50 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8"> 
     <script src="map.js"></script>
+    <link rel="stylesheet" href='covid_track.css'>
 </head>
 <body>
-     <?php 
-        if(!empty($err)){
-            echo '<div class="alert">' . $err . '</div>';
-        }        
-        ?>
 
-    <div class="column_33">
-            &nbsp;
-        </div>
-        <div class="column_34">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="row" >
-                <label>Username</label>
-                <input type="text" placeholder="username" name="username" class="form-control">
-            </div>
-            <div class="row">
-                 <label>Password</label>
-                <input type="password" name="password" placeholder="Password" class="form-control">         
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
 
-            <div class="row">
-                <div class="column_50">
-                    <!--button class="column_50" type="button"  class="half_btn">Login</button-->
-                    <input type="submit" class="btn" value="Login">
-                </div>
-               
-                <div class="column_50">
-                    <button onclick="clearForm()" class="button_100" type="button" >Cancel</button>
-                </div>
-            </div>
-            </form>
-            <div class="row">
-            <a href="register.php"> 
-                <button class="button_100" type="button"  class="regbtn">Register</button>
-            </a>
-            </div>
-           &nbsp;
-        </div>
-        <div class="column_33">
-            &nbsp;
-        </div>
-       
  
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+<div class="grid-container">
+  <div class="grid-title">
+  <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
+    </div>
+  <div class="grid-item"></div>
+  <div class="grid-item">
+    <div class="login-container">
+             <div class="login-psw"> 
+                <input type="text" placeholder="username" name="username" class="form-control">
+             </div>
+            <div class="login-psw"> 
+                <input type="password" name="password" placeholder="Password" class="form-control">
+            </div>            
+            <div class="login-item">  
+                <input type="submit" class="btn" value="Login"> 
+            </div>
+            <div class="login-item">  &nbsp;</div>
+            <div class="login-item">  
+                <button onclick="clearForm()" class="btn" type="button" >Cancel</button> 
+            </div>            
+            <div class="login-register"> 
+                 <a href="register.php"> 
+                        <button  type="button"  class="btn">Register</button>
+                </a>
+            </div>  
+             <?php 
+                    if(!empty($err)){
+                            echo ' <div class="login-err" > '. $err.' </div> ';
+                    }           
+            ?>
+                      
+        </form>
+    </div> 
+  </div>
+  <div class="grid-item">&nbsp;</div>
+</div> 
+</form>
+    
 </body>
 </html>
