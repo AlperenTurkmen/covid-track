@@ -19,17 +19,25 @@
             </div>
             <div class="content_main"> 
                 <div class="column_100"  >
-                    <h2> Status</h2> 
+                    <h2> Settings</h2> 
                 </div>
-                <div >
-                    <div style="width: 200px; float:left; height:250px;; margin:5px">
-                        <p align="justify">
-                            Hi <?php echo $_POST["name"] ?>
-                            you might have had a connection to an infected person at the location shown in red.'
-                            <br><br><br><br><br><br>
-                            Click on the marker to see details about the infection.</h2> 
-                        </p>
-                    </div>      
+                <div class="row" >
+                    <label for="cars">window</label>
+                    <select name="window" id="window">
+                    <option value="1">One week</option>
+                    <option value="2">Two weeks</option>
+                    <option value="3">Three weeks</option>
+                    <option value="4">Four weeks</option>
+                    </select>      
+                </div>
+                <div class="row">
+                    <label for "distance">distance</label>
+                    <input id="distance" type="text" name="distance" required>
+                    <!--TODO distance must be between 1-500.-->
+                </div>
+                <div>
+                    <button  type="submit"  class="cancelbtn">Report</button>    
+                    <button onclick="clearForm()"  type="button"  class="cancelbtn">Cancel</button>
                 </div>
                 
             </div>

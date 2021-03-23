@@ -14,7 +14,7 @@
                     <input type="text" placeholder="Name" name="name" required>
                 </div>
                 <div class="row" >
-                    <input type="text" placeholder="Surname" name="surname" required>
+                    <input type="text" placeholder="Surname" name="surname" >
                 <div class="row" >
                     <input type="text" placeholder="Username" name="username" required>
                 

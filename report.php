@@ -20,7 +20,7 @@
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
     }
-    $sql="INSERT INTO infections (username, visit_location_x, visit_location_y, duration) values (str_to_date('$date_time','%Y-%m-%d%H:%i'),'$x','$y','$duration')";
+    $sql="INSERT INTO infections (infection_date_time, username) values (str_to_date('$date_time','%Y-%m-%d%H:%i'),'Biri')";
     echo 'SQL:', $sql;
     $result = $conn->query($sql);
     $conn->close();

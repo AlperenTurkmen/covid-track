@@ -5,56 +5,25 @@
     </head>
     <body>
     <?php   
-     $username=$_POST['username'];
-     $password=$_POST['password'];
-     $name=$_POST['name'];
-     $surname=$_POST['surname'];
-     /*echo $username,' <br>';
-     echo $password,' <br>';
-     echo $name,' <br>';
-     echo $surname,' <br>';
-    */
-    $db_servername = "127.0.0.1";
-    $dbuser = "root";
-    $dbpassword = "At121212!.";
-    $dbname = "users";
+        $username=$_POST['username'];
+        $password=$_POST['password'];
+        $name=$_POST['name'];
+        $surname=$_POST['surname']; 
+        $db_servername = "127.0.0.1";
+        $dbuser = "root";
+        $dbpassword = "At121212!.";
+        $dbname = "users";
+        
+        // Create connection
+        $conn = new mysqli($db_servername, $dbuser, $dbpassword, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+        //TODO   EXIT or ERROR
+        }
     
-    // Create connection
-    $conn = new mysqli($db_servername, $dbuser, $dbpassword, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-
-    if(is_null($name)){ //Checks if it's login or register
-        //echo 'LOGGED IN<br>';
-        $sql="SELECT password FROM users WHERE username='$username'";
-        //echo 'SQL', $sql , "<br>";
-        $result = $conn->query($sql);
-        //echo 'result=' , $result->num_rows ,  "<br>";
-    
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) { 
-              echo "Username: " . $row["userame"]. "<br>";
-            }
-          } else {
-              
-            echo "Password Error or User Not found";
-          }
-    }   else {
-        # code to register
-        #TODO Check if username is already in use.
-        $sql="SELECT FROM visits (name,surname,username,password) values ('$name','$surname','$username','$password')";
-        //echo 'SQL ', $sql, "<br>";
-        $result = $conn->query($sql);
-        //echo 'result=' , $result->num_rows;
-
-        //echo 'REGISTERED SUCCESSFULLY!';
-    }
-    $conn->close();
     ?>
-
+        
     <div class="column_100">
         <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
         <div class="column_100">
@@ -68,20 +37,33 @@
                 <h2> Logout</h2>
             </div>
             <div class="content_main"> 
-                <div class="column_100"  >
-                    <h2> Status</h2> 
-                </div>
-                <div >
-                    <div style="width: 200px; float:left; height:250px;; margin:5px">
-                        <p align="justify">
-                            Hi <?php echo $_POST["name"] ?>
-                            you might have had a connection to an infected person at the location shown in red.'
-                            <br><br><br><br><br><br>
-                            Click on the marker to see details about the infection.</h2> 
-                        </p>
-                    </div>      
-                </div>
-                
+            <?php   
+                $sql="SELECT username,visit_date_time , visit_location_x,visit_location_y ,duration 
+                FROM visits order by duration asc limit 15;";
+               // echo 'SQL', $sql , "<br>";
+                $result = $conn->query($sql);
+                //echo 'result=' , $result->num_rows ,  "<br>";
+                if ($result->num_rows > 0) {
+                        echo '<div class="overview-container">';
+                        echo '<div class="overview-item"><b>Date Time</b></div>';
+                        echo '<div class="overview-item"><b>Duration</b></div>';
+                        echo '<div class="overview-item"><b>X</b></div>';
+                        echo '<div class="overview-item"><b>Y</b></div>';
+                        echo '<div class="overview-item"><b> &nbsp; </b></div>';
+                        // output data of each row
+                        while ($row = $result->fetch_assoc()) { 
+                            echo '<div class="overview-item">' . $row["visit_date_time"]. '</div>';
+                            echo '<div class="overview-item">' . $row["duration"]. '</div>';
+                            echo '<div class="overview-item">' . $row["visit_location_x"].' </div>';
+                            echo '<div class="overview-item">' . $row["visit_location_y"].' </div>';
+                            echo '<div class="overview-item"> X </div>';
+                        }
+                        echo '</div>'; 
+                } else {
+                        echo "Record Not found";
+                    }              
+                $conn->close();
+            ?>     
             </div>
         </div>
     </div>

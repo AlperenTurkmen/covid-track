@@ -1,19 +1,31 @@
+<?php
+session_start();
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href='covid_track.css'>
-    </head>
-    <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href='covid_track.css'>
+</head>
+<body>
     <?php   
+
+    echo "username is " . $_SESSION["username"] . "<br>";
+
      $username=$_POST['username'];
      $password=$_POST['password'];
      $name=$_POST['name'];
      $surname=$_POST['surname'];
-     /*echo $username,' <br>';
+     echo $username,' <br>';
      echo $password,' <br>';
      echo $name,' <br>';
      echo $surname,' <br>';
-    */
+    
     $db_servername = "127.0.0.1";
     $dbuser = "root";
     $dbpassword = "At121212!.";
@@ -31,15 +43,17 @@
         $sql="SELECT password FROM users WHERE username='$username'";
         //echo 'SQL', $sql , "<br>";
         $result = $conn->query($sql);
+
         //echo 'result=' , $result->num_rows ,  "<br>";
-    
+        echo "UsernameXXXXX: <br>";
         if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) { 
-              echo "Username: " . $row["userame"]. "<br>";
+             while ($row = $result->fetch_assoc()) { 
+              echo "Username: " . $row["username"]. "<br>";
+                // Set session variables
+                $_SESSION["username"] = $row["username"];
+                echo "Session variables are set.";
             }
-          } else {
-              
+          } else {    
             echo "Password Error or User Not found";
           }
     }   else {
@@ -65,7 +79,7 @@
                 <h2><a href="report.php"> Report</a></h2>
                 <h2><a href="settings.php"> Settings</a></h2>
                 <h2> &nbsp;</h2>
-                <h2> Logout</h2>
+                <h2><a href="logout.php"> Logout</a></h2>
             </div>
             <div class="content_main"> 
                 <div class="column_100"  >
@@ -74,7 +88,7 @@
                 <div >
                     <div style="width: 200px; float:left; height:250px;; margin:5px">
                         <p align="justify">
-                            Hi <?php echo $_POST["name"] ?>
+                            Hi <?php echo $_SESSION["name"] ?>
                             you might have had a connection to an infected person at the location shown in red.'
                             <br><br><br><br><br><br>
                             Click on the marker to see details about the infection.</h2> 

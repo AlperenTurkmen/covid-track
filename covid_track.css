@@ -92,3 +92,15 @@ body {
     font-weight: bold;
     color: red;
 }
+
+.overview-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+   
+  }
+.overview-item {
+    text-align: center;
+    
+  }
+
+ 

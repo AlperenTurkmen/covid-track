@@ -11,6 +11,7 @@ map.onclick = function(e) {
 
     document.getElementById("x").value = imgX;
     document.getElementById("y").value = imgY;
+
     with(document.getElementById("marker"))
     {
          style.left = e.pageX-15+ 'px' ;
@@ -27,7 +28,7 @@ map.onclick = function(e) {
   };
 function clearForm(){
     document.getElementById("form").reset();
-    marker.style.display = 'none';    
+    marker.style.display = 'none';
+    
 };
 
-}
