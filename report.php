@@ -15,11 +15,48 @@
     <body>
     <?php   
     $date=$_POST['date'];
-    $time=$_POST['time'];
+    $time=$_POST['time'].':00';
     $date_time=$date . $time;
+    $username=$_SESSION["username"] ;
+
      
-    
-    $sql="INSERT INTO infections (infection_date_time, username) values (str_to_date('$date_time','%Y-%m-%d%H:%i'),'Biri')";
+
+    if (1==1){
+         //[{"x":220,"y":200,"date":"2021-03-23","time":"11:30:00","duration":20}]
+         $srv_url = 'http://ml-lab-7b3a1aae-e63e-46ec-90c4-4e430b434198.ukwest.cloudapp.azure.com:60999/ctracker/report.php?';
+         
+         $sql="SELECT visit_date_time , visit_location_x,visit_location_y ,duration 
+               FROM visits 
+               WHERE username = '$username' 
+               AND visit_date_time<=str_to_date('$date_time','%Y-%m-%d%H:%i')
+               ORDER BY duration ASC;";
+                //echo 'SQL', $sql , "<br>";
+                $result = $conn->query($sql);
+                while ($row = $result->fetch_assoc()) { 
+                    $srv_data =  array('x'      => $row["visit_location_x"], 
+                                   'y'      => $row["visit_location_y"] , 
+                                   'date'   => $date , 
+                                   'time'   => $time , 
+                                   'duration' => $row["duration"]);
+                    echo 'data:', json_encode($srv_data) , '</br>';
+                    $srv_options = array(
+                            'http' => array(
+                            'header'  => "Content-type: application/json\r\n",
+                            'method'  => 'POST',
+                            'content' => json_encode($data),
+                        )
+                    );
+                    $srv_context  = stream_context_create($srv_options);
+                    $srv_result=file_get_contents( $srv_url, false, $srv_context ) ;   
+                    echo '<br>result:',json_decode( $srv_result );
+                    //$response = json_decode( $result );
+                }
+         
+    }
+       
+     
+    $sql="INSERT INTO infections (infection_date_time, username) 
+    values (str_to_date('$date_time','%Y-%m-%d%H:%i'),'$username')";
     // echo 'SQL:', $sql;
     $result = $conn->query($sql);
     $conn->close();
@@ -49,6 +86,7 @@
                 </div>
                 <div style="width: 800px; float:left; height:250px;; margin:5px">
                         <p align="justify">
+                       
                         <form id="form" action='' method='post'> 
                         <div class="row" >
                             <input type="date" placeholder="Date" name="date" required>
