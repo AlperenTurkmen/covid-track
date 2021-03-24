@@ -56,63 +56,61 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo "Error: " . $sql . "<br>" . $conn->error;
           }
      } else {
-        //echo  $err;
+        echo  $err;
     }
     
 }
 ?>
  
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"> 
-    <script src="map.js"></script>
-    <link rel="stylesheet" href='covid_track.css'>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href='covid_track.css'>   
 </head>
+
 <body>
-
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-<div class="grid-container">
-    <div class="grid-title">
-        <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
+    <div class="column_33">
+                &nbsp;
     </div>
-    <div class="grid-item">&nbsp; </div>
-    <div class="grid-item">
-
-        <div class="login-container">
-             <div class="login-psw"> 
-                  <input type="text" placeholder="Name" name="name" required>
-             </div>
-             <div class="login-psw"> 
-                 <input type="text" placeholder="Surname" name="surname" >
-             </div>
-             <div class="login-psw"> 
+    <!--form action='main.php' method='post'--> 
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="column_34">
+                <div class="row" >
+                <label>Name</label>    
+                    <input type="text" placeholder="Name" name="name" required>
+                </div>
+                <div class="row" >
+                    <label>Surname</label>
+                    <input type="text" placeholder="Surname" name="surname" >
+                </div>
+                <div class="row" >
+                    <label>Username</label>
                     <input type="text" placeholder="Username" name="username" 
-                            class="
+                            class="form-control
                              <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" 
-                             value="<?php echo $username; ?>">                  
-             </div>
-             <div class="login-psw"> 
-                     <input type="password" name="password"  pattern=(?!.*[^a-zA-Z0-9]).{7,}  class="<?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">  
-               
-             </div>
- 
-            <div class="login-psw">  
-                <input type="submit" class="btn" value="Register"> 
+                             value="<?php echo $username; ?>">                              
+                </div>
+                <div class="row">
+                     <label>Password</label>
+                    <!--input placeholder="Password"  type="password" id="password" name="password" pattern=(?!.*[^a-zA-Z0-9]).{7,}
+                            title="May contain  number or letter and at least 8 " required-->
+                    <input type="password" name="password"  pattern=(?!.*[^a-zA-Z0-9]).{7,}  class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">  
+                </div>
             </div>
-              
-             <?php 
-                    if(!empty($err)){
-                            echo ' <div class="login-err" > '. $err.' </div> ';
-                    }           
-            ?>
-                      
+
+            <div class="row">
+                </br>
+            </div>
+
+            <div class="row">
+                    <button class="button_100" type="submit"  class="cancelbtn">Register</button>
+            </div>
+            
+            </div>
         </form>
-    </div> 
-  </div>
-  <div class="grid-item">&nbsp;</div>
-</div> 
-</form>
- 
+        <div class="column_33">
+            
+        </div>
     </body>
 </html>

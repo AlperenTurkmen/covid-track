@@ -33,16 +33,19 @@
                 <h2><a href="logout.php"> Logout</a></h2>
             </div>
             <div class="content_main"> 
-            <?php  
+            <div class="column_100"  >
+                    <h2> Overview</h2> 
+                    <hr>
+            </div>
+            <div class="column_100">
+                <?php  
                 $visit_id=$_POST["visit_id"];
                 if (!empty($visit_id)) {
                     $sql=" DELETE FROM visits where id=$visit_id";
                     $result = $conn->query($sql);
                     echo $visit_id;
                 }    
-
-
-                //echo $visit_id;    
+               //echo $visit_id;    
                 $username=$_SESSION["username"] ;
                 //echo $username;
                 $sql="SELECT id,visit_date_time , visit_location_x,visit_location_y ,duration 
@@ -76,7 +79,8 @@
                         echo "Record Not found";
                     }              
                 $conn->close();
-            ?>     
+                ?> 
+            </div>    
             </div>
         </div>
     </div>

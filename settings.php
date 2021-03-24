@@ -6,17 +6,19 @@
     } 
     require_once "config.php";
  
-    $window=$_POST["window"];
- 
-    if (!empty($window)) {       
-        setcookie("window", $window, time() + (86400 * 30), '/');   
-    }        
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $window=$_POST["window"];
+    
+        if (!empty($window)) {       
+            setcookie("window", $window, time() + (86400 * 30), '/');   
+        }        
 
-    $distance=$_POST["distance"];
-    if (!empty($distance)) {           
-        setcookie("distance", $distance, time() + (86400 * 30), '/');   
-    } 
-
+        $distance=$_POST["distance"];
+        if (!empty($distance)) {           
+            setcookie("distance", $distance, time() + (86400 * 30), '/');   
+        } 
+        header("Location: settings.php");
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,17 +42,18 @@
             <div class="content_main"> 
                 <div class="column_100"  >
                     <h2> Settings</h2> 
+                    <hr>
                 </div>
                 <?php 
                       $cookie_name="window";
                       if(isset($_COOKIE[$cookie_name])) {
                           $window_value=$_COOKIE[$cookie_name];
-                          echo 'Window:',$window_value;
+                          //echo 'Window:',$window_value;
                      }
                      $cookie_name="distance";
                       if(isset($_COOKIE[$cookie_name])) {
                           $distance=$_COOKIE[$cookie_name];
-                          echo 'distance:',$distance;
+                          //echo 'distance:',$distance;
                      }
                 ?>
 
@@ -100,8 +103,8 @@
                 </div>
                 <div>
                     <button  type="submit"  class="btn" > Report</button>  
-
-                    <button onclick="clearForm()"  type="button"  class="btn">Cancel</button>
+                    <input class="btn" type="reset" value="Cancel">        
+                     
                 </div>
                 </form>
             </div>

@@ -1,0 +1,18 @@
+
+HOME calismiyor
+yakinlik kontrolu yok
+overview ekrani ajax ile yapilacak
+overvier menu liste page mantigi ile düzenlenecek
+
+add visit css ayarları
+
+tüm ekran büyük gibi, logout ekrana sigmiyor. css ayarları incele
+ 
+metin boyutları ayarla , class lar tanimsiz veya eksik olan itemlar var
+veri kontrolleri yok. 
+    ileri tarih girmek 
+    hatali user, sifre girmek
+
+report ederken X Y ne olacak  tum liste mi gonderilecek.
+
+service hata verince 400 405 500 icin exceptıon yaz

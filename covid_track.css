@@ -6,6 +6,7 @@ body {
     background-size: 500px 400px;
 }
 
+
 .form-control {
     height: 30px;
 }
@@ -103,7 +104,7 @@ body {
 
 
 .menu {
-    border:1px solid green;
+    border:0px solid green;
     width: 20%;
     float: left;
     text-align: center;
@@ -113,36 +114,36 @@ body {
 }
 
 .column_100 {
-    border:2px dotted brown;
+    border:0px solid brown;
     width: 100%;
     float: left;
     text-align: center;
 
 }
 .content_main {
-    border:1px solid blue;
+    border:0px solid blue;
     width: 60%;
     float: left;
     text-align: center;
     padding:2%;
 }
 .column_100 {
-    border:2px dotted brown;
+    border:0px solid brown;
     width: 100%;
     float: left;
     text-align: center;
 }
 
 .column_50 {
-    border:2px dotted brown;
+    border:0px dotted brown;
     float: left;
     width: 45%;
     text-align: center;
 }
 
 .column_33 {
-    border:2px dotted brown;
-    border:1px solid black;
+    border:0px dotted brown;
+    border:0px solid black;
     float: left;
     width: 33%;
     text-align: center;
@@ -150,7 +151,7 @@ body {
 }
 
 .column_34 {
-    border:1px solid yellow;
+    border:0px solid yellow;
     float: left;
     width: 34%;
     text-align: center;
@@ -174,13 +175,35 @@ body {
 
 }
 .menu_name {
-    border:2px dashed rgb(161, 82, 207);  
+    border:0px dashed rgb(161, 82, 207);  
     font-size: 20;
     font-family: Arial;
     font-weight: bold;
     color: red;
 }
 
+a:link {
+    color: black;
+    text-decoration-style: none;
+  }
+
+  /* visited link */
+  a:visited {
+    color: black;
+    text-decoration-line: none;
+  }
+  
+
+  
+  /* mouse over link */
+  a:hover {
+    background: rgb(132, 151, 176);
+  }
+  
+  /* selected link */
+  a:active{ 
+    background: rgb(132, 151, 176);
+  }
 
 
  

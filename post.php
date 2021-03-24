@@ -8,7 +8,7 @@ echo '<br>url:',$url;
 
 //$data = array('x' => '9999', 'y' => '9999' , 'date'=>'2021-03-23' , 'time'=>'19:59:59' , 'duration' => 20);
 $data = array("x" => "2020", "y" => "2021" , "date"=>"2021-03-24" , "time"=>"11:11:22"    , "duration"=>999);
-         
+$data = array( "x"=>"3138","y"=>"1267","date"=>"2021-03-24","time"=>"10:00:00","duration"=>"15");     
 echo '<br>data:',json_encode($data);
 $options = array(
         'http' => array(

@@ -1,0 +1,75 @@
+
+report ederken db ye user ekle
+report servisi cagirma.
+Sol menu div ve hareketli renkli olacak
+report servisi cagirmali
+
+register ekrani css ayarlari eksik
+clear buton calismiyor
+  
+
+
+
+    document.getElementById("ratioX").value = ratioX;
+    document.getElementById("ratioY").value = ratioY;
+
+    document.getElementById("naturalWidth").value = e.target.naturalWidth ;
+    document.getElementById("naturalHeight").value = e.target.naturalHeight;
+
+    document.getElementById("offsetWidth").value = e.target.offsetWidth ;
+    document.getElementById("offsetHeight").value = e.target.offsetHeight;
+
+    document.getElementById("domX").value = domX ;
+    document.getElementById("domY").value = domY;
+    document.getElementById("ex").value = e.x ;
+    document.getElementById("ey").value = e.y;
+
+    document.getElementById("pageXOffset").value = window.pageXOffset ;
+    document.getElementById("pageYOffset").value = window.pageYOffset ;
+    document.getElementById("offsetLeft").value = e.target.offsetLeft; ;
+    document.getElementById("offsetTop").value = e.target.offsetTop;;
+
+<!--
+                        <div class="row" >
+                        ratioX<input id="ratioX" type="text"  name="ratioX"   >
+                        </div>
+                        <div class="row" >
+                        ratioY<input id="ratioY" type="text" name="ratioY"   >
+                        </div>
+                        <div class="row" >
+                        naturalWidth<input id="naturalWidth" type="text"  name="naturalWidth" required >
+                        </div>
+                        <div class="row" >
+                        naturalHeight<input id="naturalHeight" type="text" name="naturalHeight" required >
+                        </div>
+                        <div class="row" >
+                        offsetWidth <input id="offsetWidth" type="text"  name="offsetWidth" required >
+                        </div>
+                        <div class="row" >
+                        offsetHeight<input id="offsetHeight" type="text" name="offsetHeight" required >
+                        </div>
+                        <div class="row" >
+                        domX <input id="domX" type="text"  name="domX" required >
+                        </div>
+                        <div class="row" >
+                        domY<input id="domY" type="text" name="domY" required >
+                        </div>
+                        <div class="row" >
+                        ex<input id="ex" type="text"  name="ex" required >
+                        </div>
+                        <div class="row" >
+                        ey<input id="ey" type="text" name="ey" required >
+                        </div>
+                        <div class="row" >
+                        pageXOffset <input id="pageXOffset" type="text"  name="pageXOffset" required >
+                        </div>
+                        <div class="row" >
+                        pageYOffset <input id="pageYOffset" type="text" name="pageYOffset" required >
+                        </div>
+                        <div class="row" >
+                        offsetLeft  <input id="offsetLeft" type="text"  name="offsetLeft" required >
+                        </div>
+                        <div class="row" >
+                        offsetTop <input id="offsetTop" type="text" name="offsetTop" required >
+                        </div>
+-->

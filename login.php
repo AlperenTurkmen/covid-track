@@ -63,22 +63,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8"> 
     <script src="map.js"></script>
     <link rel="stylesheet" href='covid_track.css'>
+    <script>
+    function clearForm(){
+        document.getElementById("form").reset(); 
+    };
+    </script>
 </head>
 <body>
 
-
- 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 <div class="grid-container">
-  <div class="grid-title">
-  <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
+    <div class="grid-title">
+        <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
     </div>
-  <div class="grid-item"></div>
-  <div class="grid-item">
+    <div class="grid-item">&nbsp; </div>
+    <div class="grid-item">
     <div class="login-container">
-             <div class="login-psw"> 
+            <div class="login-psw"> 
                 <input type="text" placeholder="username" name="username" class="form-control">
-             </div>
+            </div>
             <div class="login-psw"> 
                 <input type="password" name="password" placeholder="Password" class="form-control">
             </div>            
@@ -87,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="login-item">  &nbsp;</div>
             <div class="login-item">  
-                <button onclick="clearForm()" class="btn" type="button" >Cancel</button> 
+                 <input class="btn" type="reset" value="Cancel">  
             </div>            
             <div class="login-register"> 
                  <a href="register.php"> 
@@ -98,14 +101,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     if(!empty($err)){
                             echo ' <div class="login-err" > '. $err.' </div> ';
                     }           
-            ?>
-                      
-        </form>
+            ?>          
     </div> 
   </div>
   <div class="grid-item">&nbsp;</div>
 </div> 
 </form>
-    
+   
+
 </body>
 </html>

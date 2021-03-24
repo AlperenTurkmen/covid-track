@@ -9,11 +9,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="map.js"></script>
     <meta charset="UTF-8">
     <link rel="stylesheet" href='covid_track.css'>
 </head>
 <body>
-      
+    
+     
      <div class="column_100">
         <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
         <div class="column_100">
@@ -29,6 +31,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <div class="content_main"> 
                 <div class="column_100"  >
                     <h2> Status</h2> 
+                    <hr>
                 </div>
                 <div >
                     <div style="width: 200px; float:left; height:250px;; margin:5px">
@@ -40,8 +43,27 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         </p>
                     </div>
                     <div id="map" style=" border-style: dashed; width: 400px; float:right; height:400px; background:gray; margin:0px ">
+                         
+                        <?php
+                            $url = 'http://ml-lab-7b3a1aae-e63e-46ec-90c4-4e430b434198.ukwest.cloudapp.azure.com:60999/ctracker/infections.php?ts=1'.$ip;
+                            $srv_response =file_get_contents($url);
+                            $srv_data = json_decode($srv_response, true);
+                            foreach ($srv_data AS $d){
+                                $x_loc = $d["x"];  
+                                $y_loc = $d["y"];  
+                                //calculate the positon will take time. just used static values from used values.
+                                $ratio=9.5; 
+                                $x_loc =  ($x_loc/$ratio) + 700;
+                                $y_loc =  ($y_loc/$ratio) + 400;//
+                                echo '<img src="marker_red.png" id="red_marker" name="red_marker" 
+                                style="display: block; position: absolute;left: '.$x_loc.'px; top: '.$y_loc.'px; width:30px; height:30px;" />';
+                                //echo 'x,y:',$x_loc , $y_loc;
+                            }
+ 
+                        ?>  
                         <img style="max-width:100%;max-height:100%; float:right;" src='exeter.jpg'>
-                        <map 
+                        
+                        
                     </div>        
                 </div>
                 

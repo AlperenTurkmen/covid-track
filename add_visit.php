@@ -22,22 +22,24 @@
     <body>
         
     <?php   
-     $time=$_POST['time'];
-     $date=$_POST['date'];
-     $x=$_POST['x'];
-     $y=$_POST['y'];
-     //echo 'x,y',$x, ',' ,$y ,'.', '<br>';
-     $date_time=$date . $time;
-     $duration=$_POST['duration'];
-     //echo 'date_time:', $date_time,' <br>';
-     //echo 'date:', $date,'-',$time,' <br>';
-     $username=$_SESSION["username"] ;
-    
-    $sql="INSERT INTO visits (username, visit_date_time, visit_location_x, visit_location_y, duration) 
-    values ('$username', str_to_date('$date_time','%Y-%m-%d%H:%i'),'$x','$y','$duration')";
-    echo 'SQL:', $sql;
-    $result = $conn->query($sql);
-    $conn->close();
+     if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $time=$_POST['time'];
+        $date=$_POST['date'];
+        $x=$_POST['x'];
+        $y=$_POST['y'];
+        //echo 'x,y',$x, ',' ,$y ,'.', '<br>';
+        $date_time=$date . $time;
+        $duration=$_POST['duration'];
+        //echo 'date_time:', $date_time,' <br>';
+        //echo 'date:', $date,'-',$time,' <br>';
+        $username=$_SESSION["username"] ;
+        
+        $sql="INSERT INTO visits (username, visit_date_time, visit_location_x, visit_location_y, duration) 
+        values ('$username', str_to_date('$date_time','%Y-%m-%d%H:%i'),'$x','$y','$duration')";
+        echo 'SQL:', $sql;
+        $result = $conn->query($sql);
+        $conn->close();
+     }
     ?>
 
     <div class="column_100">
@@ -55,6 +57,7 @@
             <div class="content_main"> 
                 <div class="column_100"  >
                     <h2> Add visit</h2> 
+                    <hr>
                 </div>
                 <div >
                     <div style="width: 200px; float:left; height:250px;; margin:5px">
@@ -67,24 +70,22 @@
                         <input type="time" placeholder="Time" name="time" required>
                         </div>
                         <div class="row" >
-                        <input type="time" placeholder="Duration" name="duration" required>
+                        <input type="number" placeholder="Duration" name="duration" required>
                         </div>
                         <div class="row">
-                            <button class="button_100" type="submit"  class="cancelbtn">Add</button>
+                            <button class="btn" type="submit"   >Add</button>
                         </div>
                         <div class="row">
-                            <button onclick="clearForm()" class="button_100" type="button"  class="cancelbtn">Cancel</button>
+                            <button onclick="clearForm()" class="btn" type="button"  >Cancel</button>
                         </div>
                         <div class="row" >
                             <input id="x" type="text"  name="x" required >
                         </div>
                         <div class="row" >
-                            <input id="y" type="text" name="y" required >
+                            <input id="y" type="hidden" name="y" required >
                         </div>
 
-                            <br><br><br><br><br><br>
-                        </h2> 
-                        </p>
+ 
                     </div>
                     </form>
                     <div id="map" style=" border-style: dashed; padding:30; width: 400px; float:right; height:400px; background:gray; margin:0px ">
