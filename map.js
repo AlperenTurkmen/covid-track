@@ -20,6 +20,13 @@ map.onclick = function(e) {
      
 
   };
+function checkCoordinates(){
+  if(document.getElementById("x").value=='' || document.getElementById("y").value==''){
+    alert('You should choose a point from the map!');
+    
+}
+  }
+  
 
 function clearForm(){
     document.getElementById("form").reset();

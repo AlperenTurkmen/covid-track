@@ -72,9 +72,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+<div class="covid19_title">COVID - 19 Contact Tracing</div>
 <div class="grid-container">
     <div class="grid-title">
-        <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
     </div>
     <div class="grid-item">&nbsp; </div>
     <div class="grid-item">

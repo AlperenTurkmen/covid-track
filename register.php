@@ -73,32 +73,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 <div class="grid-container">
+    
     <div class="grid-title">
-        <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
+    <div class="covid19_title">COVID - 19 Contact Tracing</div>
     </div>
     <div class="grid-item">&nbsp; </div>
     <div class="grid-item">
 
         <div class="login-container">
              <div class="login-psw"> 
-                  <input type="text" placeholder="Name" name="name" required>
+                  <input style="width: 100%;height:40px;" type="text" placeholder="Name" name="name" required>
              </div>
              <div class="login-psw"> 
-                 <input type="text" placeholder="Surname" name="surname" >
+                 <input style="width: 100%;height:40px;" type="text" placeholder="Surname" name="surname" >
              </div>
              <div class="login-psw"> 
-                    <input type="text" placeholder="Username" name="username" 
+                    <input style="width: 100%;height:40px;" type="text" placeholder="Username" name="username" 
                             class="
                              <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" 
                              value="<?php echo $username; ?>">                  
              </div>
              <div class="login-psw"> 
-                     <input type="password" name="password"  pattern=(?!.*[^a-zA-Z0-9]).{7,}  class="<?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">  
+                     <input style="width: 100%;height:40px;" type="password" placeholder="Password" name="password"  pattern=(?!.*[^a-zA-Z0-9]).{7,}  class="<?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">  
                
              </div>
  
             <div class="login-psw">  
-                <input type="submit" class="btn" value="Register"> 
+                <input style="width: 100%;height:40px;" type="submit" class="btn" value="Register"> 
             </div>
               
              <?php 

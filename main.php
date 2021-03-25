@@ -17,16 +17,16 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     
      
      <div class="column_100">
-        <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
+        <div class="covid19_title">COVID - 19 Contact Tracing</div>
         <div class="column_100">
-            <div class="menu" >
-                <h2 style=background-color: rgb(100, 285, 202);> <a href="main.php"> Home </a></h2>
-                <h2><a href="overview.php"> Overview</a><h2>
-                <h2><a href="add_visit.php"> Add Visit</a></h2>
-                <h2><a href="report.php"> Report</a></h2>
-                <h2><a href="settings.php"> Settings</a></h2>
-                <h2> &nbsp;</h2>
-                <h2><a href="logout.php"> Logout</a></h2>
+        <div class="menu" >
+                <a href="main.php" style="text-decoration:none;"><div class="side_menu" style="background: rgb(132, 151, 176);"> Home </div></a>
+                <a href="overview.php" style="text-decoration:none;"><div class="side_menu"> Overview</div></a>
+                <a href="add_visit.php" style="text-decoration:none;"><div class="side_menu"> Add Visit</div></a>
+                <a href="report.php" style="text-decoration:none;"><div class="side_menu"> Report</div></a>
+                <a href="settings.php" style="text-decoration:none;"><div class="side_menu"> Settings</div></a>
+                 &nbsp;
+                <a href="logout.php" style="text-decoration:none;"><div class="side_menu"> Logout</div></a>
             </div>
             <div class="content_main"> 
                 <div class="column_100"  >
@@ -34,7 +34,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                     <hr>
                 </div>
                 <div >
-                    <div style="width: 200px; float:left; height:250px;; margin:5px">
+                    <div style="font-family: 'Times New Roman', Times, serif; font-size: 20px; width: 200px; float:left; height:250px; margin:5px">
                         <p align="justify">
                             Hi <?php echo $_SESSION["name"] ?>
                             you might have had a connection to an infected person at the location shown in red.'
@@ -47,6 +47,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                         <?php
                             $url = 'http://ml-lab-7b3a1aae-e63e-46ec-90c4-4e430b434198.ukwest.cloudapp.azure.com:60999/ctracker/infections.php?ts=1'.$ip;
                             $srv_response =file_get_contents($url);
+                            //echo '$srv_response :', $srv_response ;
                             $srv_data = json_decode($srv_response, true);
                             foreach ($srv_data AS $d){
                                 $x_loc = $d["x"];  

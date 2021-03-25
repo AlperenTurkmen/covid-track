@@ -21,16 +21,16 @@
     <body>
      
     <div class="column_100">
-        <div class="covid19_title"><h1>COVID - 19 Contact Tracing</h1></div>
+        <div class="covid19_title">COVID - 19 Contact Tracing</div>
         <div class="column_100">
-            <div class="menu" >
-                <h2 style=background-color: rgb(100, 285, 202);> <a href="main.php"> Home </a></h2>
-                <h2><a href="overview.php"> Overview</a><h2>
-                <h2><a href="add_visit.php"> Add Visit</a></h2>
-                <h2><a href="report.php"> Report</a></h2>
-                <h2><a href="settings.php"> Settings</a></h2>
-                <h2> &nbsp;</h2>
-                <h2><a href="logout.php"> Logout</a></h2>
+        <div class="menu" >
+                <a href="main.php" style="text-decoration:none;"><div class="side_menu"> Home</div></a>
+                <a href="overview.php" style="text-decoration:none;"><div class="side_menu" style="background: rgb(132, 151, 176);"> Overview</div></a>
+                <a href="add_visit.php" style="text-decoration:none;"><div class="side_menu"> Add Visit</div></a>
+                <a href="report.php" style="text-decoration:none;"><div class="side_menu"> Report</div></a>
+                <a href="settings.php" style="text-decoration:none;"><div class="side_menu"> Settings</div></a>
+                 &nbsp;
+                <a href="logout.php" style="text-decoration:none;"><div class="side_menu"> Logout</div></a>
             </div>
             <div class="content_main"> 
             <div class="column_100"  >
@@ -76,7 +76,7 @@
                         }
                         echo '</div>'; 
                 } else {
-                        echo "Record Not found";
+                        echo "Visit records Not found";
                     }              
                 $conn->close();
                 ?> 
