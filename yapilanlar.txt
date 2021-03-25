@@ -7,7 +7,10 @@ report servisi cagirmali
 register ekrani css ayarlari eksik
 clear buton calismiyor
   
-
+<form action='.$a.'  method="post">
+                                  <input type="hidden" id="visit_id" name="visit_id" value='.$row["id"].'>
+                                  <input type="submit" class="btn" value="X"> 
+                                  </form>
 
 
     document.getElementById("ratioX").value = ratioX;

@@ -40,8 +40,8 @@
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){ 
           $srv_url = 'http://ml-lab-7b3a1aae-e63e-46ec-90c4-4e430b434198.ukwest.cloudapp.azure.com:60999/ctracker/report.php?';
-         //I couldn't avoid sql injections here because there is no time left to submission :(
-          $sql="SELECT visit_date_time , visit_location_x,visit_location_y ,duration 
+         
+         $sql="SELECT visit_date_time , visit_location_x,visit_location_y ,duration 
                FROM visits 
                WHERE username = '$username' 
                AND visit_date_time<=str_to_date('$date_time','%Y-%m-%d%H:%i')
@@ -67,20 +67,21 @@
                     $srv_result=file_get_contents( $srv_url, false, $srv_context ) ;   
                     //echo '<br>result:',json_decode( $srv_result );
                     //$response = json_decode( $result );
-                }        
+                }
+         
     }
-    
+       
+     
     $sql="INSERT INTO infections (infection_date_time, username) 
-    values (str_to_date('$date_time','%Y-%m-%d%H:%i:00'),'$username')";
+    values (str_to_date('$date_time','%Y-%m-%d%H:%i'),'$username')";
     // echo 'SQL:', $sql;
 
-    $stmt = $conn->prepare('INSERT INTO infections (infection_date_time, username) 
-    values (str_to_date(?,"%Y-%m-%d%H:%i:00"),?)');
-        $stmt->bind_param('ss', $date_time ,$username); 
-        $stmt->execute();
-        $result = $stmt->get_result();
+                $stmt = $conn->prepare('SELECT  name, password FROM users WHERE username = ?' );
+            $stmt->bind_param('s', $param_username); 
 
-    //$result = $conn->query($sql);
+            $stmt->execute();
+            $result = $stmt->get_result();
+    $result = $conn->query($sql);
     $conn->close();
     ?>
 

@@ -1,44 +1,79 @@
+<?php
+session_start();
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href='covid_track.css'>
-    </head>
-
-    <body>
-        <div class="column_33">
-            &nbsp;
-        </div>
-        <div class="column_34">
-        <form action='main.php' method='post'> 
-            <div class="row" >
-                <input type="text" placeholder="Username" name="username" required>
+<html lang="en">
+<head>
+    <title> COVID-CT: Home Page</title>
+    <script src="map.js"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href='covid_track.css'>
+</head>
+<body>
+    
+     
+     <div class="column_100">
+        <div class="covid19_title">COVID - 19 Contact Tracing</div>
+        <div class="column_100">
+        <div class="menu" >
+                <a href="index.php" style="text-decoration:none;"><div class="side_menu" style="background: rgb(132, 151, 176);"> Home </div></a>
+                <a href="overview.php" style="text-decoration:none;"><div class="side_menu"> Overview</div></a>
+                <a href="add_visit.php" style="text-decoration:none;"><div class="side_menu"> Add Visit</div></a>
+                <a href="report.php" style="text-decoration:none;"><div class="side_menu"> Report</div></a>
+                <a href="settings.php" style="text-decoration:none;"><div class="side_menu"> Settings</div></a>
+                 &nbsp;<br><br><br>
+                <a href="logout.php" style="text-decoration:none;"><div class="side_menu"> Logout</div></a>
             </div>
-
-            <div class="row">
-                 <input placeholder="Password"  type="password" id="pspasswordw" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-                title="Password cannot be NULL  !!!" required>
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                <div class="column_50">
-                    <button class="column_50" type="submit" class="half_btn">Login</button>
-                    
+            <div class="content_main"> 
+                <div class="column_100"  >
+                    <h2> Status</h2> 
+                    <hr>
                 </div>
-                </form>
-                <div class="column_50">
-                    <button class="button_50" type="button"  class="half_btn">Cancel</button>
+                <div >
+                    <div style="font-family: 'Times New Roman', Times, serif; font-size: 20px; width: 200px; float:left; height:250px; margin:5px">
+                        <p align="justify">
+                            Hi <?php echo $_SESSION["name"] ?>
+                            you might have had a connection to an infected person at the location shown in red.'
+                            <br><br><br><br><br><br>
+                            Click on the marker to see details about the infection.</h2> 
+                        </p>
+                    </div>
+                    <div id="map" style=" border-style: dashed; width: 400px; float:right; height:400px; background:gray; margin:0px ">
+                         
+                        <?php
+                            $url = 'http://ml-lab-7b3a1aae-e63e-46ec-90c4-4e430b434198.ukwest.cloudapp.azure.com:60999/ctracker/infections.php?ts=1'.$ip;
+                            $srv_response =file_get_contents($url);
+                            //echo '$srv_response :', $srv_response ;
+                            $srv_data = json_decode($srv_response, true);
+                            foreach ($srv_data AS $d){
+                                $x_loc = $d["x"];  
+                                $y_loc = $d["y"];  
+                                //calculate the position will take time. just used static approx. values from addvisit values.
+                                $ratio=9.5; 
+                                $x_loc =  ($x_loc/$ratio) + 700;
+                                $y_loc =  ($y_loc/$ratio) + 300;//
+                                echo '<img src="marker_red.png" id="red_marker" name="red_marker" 
+                                style="display: block; position: absolute;left: '.$x_loc.'px; top: '.$y_loc.'px; width:30px; height:30px;" />';
+                                //echo 'x,y:',$x_loc , $y_loc;
+                            }
+ 
+                        ?>  
+                        <img style="max-width:100%;max-height:100%; float:right;" src='exeter.jpg'>
+                        
+                        
+                    </div>        
                 </div>
+                
             </div>
-
-            <div class="row">
-                <a href="register_page.php" target="_self">
-                    <button class="button_100" type="button"  class="cancelbtn">Register</button>
-                </a>   
-            </div>
-            &nbsp;
         </div>
-        <script src="check.js"></script>
+    </div>
+
+   
+    
     </body>
 </html>

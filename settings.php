@@ -23,6 +23,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title> COVID-CT: Settings</title>
         <link rel="stylesheet" href='covid_track.css'>
     </head>
     <body>
@@ -31,12 +32,12 @@
         <div class="covid19_title">COVID - 19 Contact Tracing</div>
         <div class="column_100">
         <div class="menu" >
-                <a href="main.php" style="text-decoration:none;"><div class="side_menu"> Home</div></a>
+                <a href="index.php" style="text-decoration:none;"><div class="side_menu"> Home</div></a>
                 <a href="overview.php" style="text-decoration:none;"><div class="side_menu"> Overview</div></a>
                 <a href="add_visit.php" style="text-decoration:none;"><div class="side_menu"> Add Visit</div></a>
                 <a href="report.php" style="text-decoration:none;"><div class="side_menu"> Report</div></a>
                 <a href="settings.php" style="text-decoration:none;"><div class="side_menu" style="background: rgb(132, 151, 176);"> Settings</div></a>
-                 &nbsp;
+                &nbsp;<br><br><br>
                 <a href="logout.php" style="text-decoration:none;"><div class="side_menu"> Logout</div></a>
             </div>
             <div class="content_main"> 
@@ -61,7 +62,7 @@
                 
                 <div class="row" >
                     <label for="window" >window</label>
-                    <select name="window" id="window">
+                    <select style="width: 53%;height:40px;" name="window" id="window">
                     <option   
                     <?php 
                         if ($window_value=="1") {
@@ -94,7 +95,7 @@
                 </div>
                 <div class="row">
                     <label for "distance">distance</label>
-                    <input id="distance" type="text" name="distance" 
+                    <input style="width: 52%;height:40px;" id="distance" type="text" name="distance" 
                      <?php 
                         echo " value = '".$distance."'" ;     
                      ?>
@@ -102,8 +103,8 @@
                     <!--TODO distance must be between 1-500.-->
                 </div>
                 <div>
-                    <button  type="submit"  class="btn" > Report</button>  
-                    <input class="btn" type="reset" value="Cancel">        
+                    <button style="width: 60%;height:40px;" type="submit"  class="btn" > Report</button>  
+                    <input style="width: 60%;height:40px;" class="btn" type="reset" value="Cancel">        
                      
                 </div>
                 </form>

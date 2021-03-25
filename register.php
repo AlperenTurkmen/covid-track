@@ -14,9 +14,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $err = "Please enter a username.";
         } else{
             $param_username = trim($_POST["username"]);
-            $sql = "SELECT username FROM users WHERE username = '$param_username'";
-            //echo $sql;
-            $result = $conn->query($sql);
+            //$sql = "SELECT username FROM users WHERE username = '$param_username'";
+
+            $stmt = $conn->prepare('SELECT  username FROM users WHERE username = ?' );
+            $stmt->bind_param('s', $param_username); 
+            $stmt->execute();
+            $result = $stmt->get_result();
             //echo 'result=' , $result->num_rows ,  "<br>";
             //echo "record count: ",$result->num_rows,  "<br>";
             if($result->num_rows >= 1){
@@ -41,16 +44,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $surname=trim($_POST['surname']);
         $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
      
-        $sql="INSERT INTO users (name,surname,username,password) 
-                values ('$name','$surname','$username','$param_password');";
+        //$sql="INSERT INTO users (name,surname,username,password) THIS WAS THE FORMER, INSECURE VERSION.
+        //        values ('$name','$surname','$username','$param_password');";
+        $stmt = $conn->prepare('INSERT INTO users (name,surname,username,password) #This lines check for sql injections
+                values (?,?,?,?)' );
+        $stmt->bind_param('ssss', $name,$surname,$username,$param_password); 
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $conn->close();
+
+
+       // $sql=filter_var($sql,FILTER_SANITIZE_STRING);        
         //echo 'SQL ', $sql, "<br>";
-        if ($conn->query($sql) === TRUE) {
+        if ($stmt) {
             //echo "New record created successfully";
             session_start();
             $_SESSION["loggedin"] = true;
             $_SESSION["name"] = $name;
             $_SESSION["username"] = $username;  
-            header("Location: main.php");
+            header("Location: index.php");
           } else {
             echo "Something went wrong when registering. Please try again later.";    
             echo "Error: " . $sql . "<br>" . $conn->error;
@@ -65,6 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title> COVID-CT: Registration</title>
     <meta charset="UTF-8"> 
     <script src="map.js"></script>
     <link rel="stylesheet" href='covid_track.css'>

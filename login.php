@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("Location: main.php");
+    header("Location: index.php");
     exit;
 }
  
@@ -29,9 +29,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     if (empty($err)) {
             $param_username = $username;
-            $sql = "SELECT  name, password FROM users WHERE username = '$param_username'";
-            //echo $sql;
-            $result = $conn->query($sql);
+            $stmt = $conn->prepare('SELECT  name, password FROM users WHERE username = ?' );
+            $stmt->bind_param('s', $param_username); 
+
+            $stmt->execute();
+            $result = $stmt->get_result();
+
             if($result->num_rows == 1) {
                 $row = $result->fetch_assoc();
                 $name =$row["name"];
@@ -43,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 $_SESSION["loggedin"] = true;
                                 $_SESSION["name"] = $name;
                                 $_SESSION["username"] = $username;  
-                                header("Location: main.php");
+                                header("Location: index.php");
                 } else {
                         // Username doesn't exist, display a generic error message
                         $err = "Invalid username or password.";
@@ -60,6 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title> COVID-CT: Login</title>
     <meta charset="UTF-8"> 
     <script src="map.js"></script>
     <link rel="stylesheet" href='covid_track.css'>

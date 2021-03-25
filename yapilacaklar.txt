@@ -16,3 +16,13 @@ veri kontrolleri yok.
 report ederken X Y ne olacak  tum liste mi gonderilecek.
 
 service hata verince 400 405 500 icin exceptıon yaz
+
+
+
+
+
+Warning: file_get_contents(): php_network_getaddresses: getaddrinfo failed: nodename nor servname provided, or not known in /Users/alperenturkmen/Sites/covid-track/index.php on line 50
+
+Warning: file_get_contents(http://ml-lab-7b3a1aae-e63e-46ec-90c4-4e430b434198.ukwest.cloudapp.azure.com:60999/ctracker/infections.php?ts=1): failed to open stream: php_network_getaddresses: getaddrinfo failed: nodename nor servname provided, or not known in /Users/alperenturkmen/Sites/covid-track/index.php on line 50
+
+Warning: Invalid argument supplied for foreach() in /Users/alperenturkmen/Sites/covid-track/index.php on line 53

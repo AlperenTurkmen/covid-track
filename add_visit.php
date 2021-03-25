@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title> COVID-CT: Add visit</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href='covid_track.css'>
 </head>
@@ -34,11 +35,18 @@
         //echo 'date:', $date,'-',$time,' <br>';
         $username=$_SESSION["username"] ;
         
-        $sql="INSERT INTO visits (username, visit_date_time, visit_location_x, visit_location_y, duration) 
-        values ('$username', str_to_date('$date_time','%Y-%m-%d%H:%i'),'$x','$y','$duration')";
+        //$sql="INSERT INTO visits (username, visit_date_time, visit_location_x, visit_location_y, duration) 
+        //values ('$username', str_to_date('$date_time','%Y-%m-%d%H:%i'),'$x','$y','$duration')";
         #echo 'SQL:', $sql;
-        $result = $conn->query($sql);
-        $conn->close();
+        //$result = $conn->query($sql);
+        //$conn->close();
+        $stmt = $conn->prepare('INSERT INTO visits 
+        (username, visit_date_time, visit_location_x, visit_location_y, duration) #This lines check for sql injections
+                values (?,str_to_date(?,"%Y-%m-%d%H:%i"),?,?,?)' );
+        $stmt->bind_param('sssss', $username,$date_time,$x,$y,$duration); 
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
      }
     ?>
 
@@ -46,12 +54,12 @@
         <div class="covid19_title">COVID - 19 Contact Tracing</div>
         <div class="column_100">
             <div class="menu" >
-                <a href="main.php" style="text-decoration:none;"><div class="side_menu"> Home</div></a>
+                <a href="index.php" style="text-decoration:none;"><div class="side_menu"> Home</div></a>
                 <a href="overview.php" style="text-decoration:none;"><div class="side_menu"> Overview</div></a>
                 <a href="add_visit.php" style="text-decoration:none;"><div class="side_menu" style="background: rgb(132, 151, 176);"> Add Visit</div></a>
                 <a href="report.php" style="text-decoration:none;"><div class="side_menu"> Report</div></a>
                 <a href="settings.php" style="text-decoration:none;"><div class="side_menu"> Settings</div></a>
-                 &nbsp;
+                &nbsp;<br><br><br>
                 <a href="logout.php" style="text-decoration:none;"><div class="side_menu"> Logout</div></a>
             </div>
             <div class="content_main"> 
@@ -60,18 +68,22 @@
                     <hr>
                 </div>
                 <div >
-                    <div style="width: 200px; float:left; height:250px;; margin:5px">
-                        <p align="justify">
+                    <div style="width: 200px; float:left; height:250px;; margin:5px align-items: center;">
+  
                         <form id="form" action='' method='post'> 
-                        <div class="row" >
-                            <input type="date" placeholder="Date" name="date" required>
+                        <div class="row">
+                            <input style="width: 96%;height:40px;text-align:center;" type="date" placeholder="Date" name="date" required>
                         </div>
                         <div class="row" >
-                        <input type="time" placeholder="Time" name="time" required>
+                        <input style="width: 96%;height:40px;text-align:center;" type="time" placeholder="Time" name="time" required>
                         </div>
                         <div class="row" >
-                        <input type="number" placeholder="Duration" name="duration" required>
+                        <input style="width: 96%;height:40px;" type="number" placeholder="Duration" name="duration" required>
                         </div>
+                        <div>  &nbsp;</div>
+                        <div>  &nbsp;</div>
+                        <div>  &nbsp;</div>
+                        <div>  &nbsp;</div>
                         <div class="row">
                             <button onclick="checkCoordinates()"class="btn" type="submit"   >Add</button>
                         </div>
